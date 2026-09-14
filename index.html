@@ -6,7 +6,7 @@
     <!-- BEGIN CHANGE ME -->
     <title>Reproducible Research Through Reusable Code - Workshop Slides</title>
     <meta name="description" content="Reproducible research is the foundation of science. This workshop is tailored for PhD candidates and Research Software Engineers affiliated with Dutch research institutions who would like to learn more about how to apply best practices to make your research reproducible through reusable code.">
-    <meta name="author" content="Ole Mussmann, Malte Lüken">
+    <meta name="author" content="Malte Lüken">
     <!-- END CHANGE ME -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -32,19 +32,38 @@
             <textarea data-template>
 
               <h1 style="font-size: 220%;">Reproducible Research Through Reusable Code</h1>
+              <h2>An Overview with Best Practices</h2>
 
-              [Malte Lüken](mailto:m.luken@esciencecenter.nl), [Ole Mussmann](mailto:o.mussmann@esciencecenter.nl)
+              [Malte Lüken](mailto:m.luken@esciencecenter.nl)
 
               <p><small>Slides based on the Carptentries workshop <a href="https://carpentries-incubator.github.io/reproducible-research-through-reusable-code-in-1-day/"><em>Reproducible research through reusable code in 1 day</em></a> developed by Sven van der Burg and Eduard Klapwijk under the CC-BY 4.0 license</small></p>
+            
+              <img src="files/qr_slides.png" alt="QR code for link to slides." width="160" height="173">
             </textarea>
           </section>
 
-          <section> <!-- start of Introduction -->
-            <section data-state="standard 10">
-              <h1>Introduction</h1>
-              <p>Reproducibility: Definitions, Advantages, and Barriers</p>
-            </section>
+          <section> <!-- start of Table of contents -->
+            <section data-state="standard 10" data-markdown>
+              <textarea data-template>
+                ## Overview
 
+                - Reproducibility and reusable code
+                - Version control
+                - Software dependencies
+                - Coding conventions
+                - Modular coding
+                - Testing
+                - Documentation
+                
+              </textarea>
+            </section>
+          </section> <!-- end of Table of contents -->
+
+          <section> <!-- start of Reproducibility and reusable code -->
+            <section data-state="standard 10">
+              <h1>Reproducibility and Resusable Code</h1>
+              <p>Advantages and Barriers</p>
+            </section>
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
                 ## What Is Reproducible Research? 
@@ -55,6 +74,8 @@
                       width="555" height="285">
                   <figcaption><small>The Turing Way Community. (2022). <em>The Turing Way: A handbook for reproducible, ethical and collaborative research (1.0.2)</em>. Zenodo. https://zenodo.org/records/7625728</small></figcaption>
                 </figure>
+
+                Reproducibility &ne reusability
                 
               </textarea>
             </section>
@@ -94,50 +115,83 @@
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Where to Start
+                ## Reusable Code
 
-                - Philosophy: Partial reproducibility > no reproducibility!
-                - Small steps: Improve practices from one project to the next
-                - Use checklists to get an overview
-                - Good starting point: Version control
+                - Best practices for creating reusable code overlap with best practices for reproducibility
+                  - Example: Open code can be reused, allowing others to reproduce your analysis
+                - But: Making code reusable can also compromise reproducibility!
+                  - Example: Creating abstractions can make code harder to read and introduce unintended errors
                 
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Version Control and Reproducibility
+                ## Where to Start
+
+                - Philosophy: Partial reproducibility > no reproducibility!
+                - Small steps: Improve practices from one project to the next
+                - Use checklists to get an overview
+                - Making code reusable can improve reproducibility but also comes with risks
+                - Keep scope in mind:
+                  - Reproducibility and making code resusable requires ressources
+                  - Balance between costs and benefits
+                - Good starting point: Version control
+                
+              </textarea>
+            </section>
+          </section> <!-- end of Reproducibility and reusable code -->
+
+          <section> <!-- start of Version control -->
+
+            <section data-state="standard 10" data-markdown>
+              <textarea data-template>
+                ## Version Control
 
                 - Tracks which versions of the code and data led to which results reported in a paper
                 - Tracks a version history to follow changes over time
                 - Hides older versions to avoid cluttering
                 - Allows for collaborative development and tracks who made which changes
                 - Different frameworks for code (e.g., git) and data (e.g., git-annex)
+                - Requires a specific workflow (e.g., commit, review, merge)
                 
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## This Workshop
+                ## Best Practice: Atomic Commits
 
-                - Focus on computational reproducibility and resusable code
-                - Gives you an overview of the most important aspects
-                - Time to improve you own project and receive feedback from others
+                - Common problems when using version control (i.e., git):
+                  - Many unrelated changes in one commit (e.g., "Upload codebase")
+                  - Large pull/merge requests that cannot properly be reviewed anymore
+                - Solution: Atomic commits
+                  - Target a single issue
+                  - Minimum amount of work
+                  - Complete solution to problem
+                  - Can be summarized with a simple and concise message
                 
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Resources
+                ## Example: Atomic Commits
 
-                - The Turing Way Community. (2022). <em>The Turing Way: A handbook for reproducible, ethical and collaborative research (1.0.2)</em>. Zenodo. https://zenodo.org/records/7625728
+                ```txt
+                commit abc "Fix bugs"
+                commit xyz "Add tests"
+                ```
+                vs.
+                ```txt
+                commit abc "Fix numpy broadcasting bug in function foo" (includes test)
+                commit xyz "Fix numerical instability in function bar" (includes test)
+                ```
                 
               </textarea>
             </section>
 
-          </section> <!-- end of Introduction -->
+          </section> <!-- end of Version control -->
 
           <section> <!-- start of Software Dependencies -->
             <section data-state="standard 10" data-markdown>
@@ -168,144 +222,40 @@
               <p style="font-size: smaller;"><a href="https://xkcd.com/2347/">xkcd.com/2347</a></p>
             </section>
 
-            <section data-state="standard 2" data-background-image="./files/carrots-5956003_1920.jpg">
-              <!-- Image by <a href="https://pixabay.com/users/igorkocka-19859205/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5956003">IgorKocka</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5956003">Pixabay</a> -->
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Software ↔️ <span class="fragment">Recipe</span><br>Data ↔️ <span class="fragment">Ingredients</span>
-
-                <img style="height: 30vh;" src="./files/recipe.png">
-
-                <p style="font-size: smaller;">Midjourney, CC-BY-NC 4.0</p>
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Libraries ↔️ <span class="fragment">Pots, Tools</span>
-
-                <img style="height: 30vh;" src="./files/libraries.png">
-
-                <p style="font-size: smaller;">Midjourney, CC-BY-NC 4.0</p>
-              </textarea>
-            </section>
-
-            <section data-state="standard 10 scroll">
-              <h2>Many, <em>Many</em> Tools Wanting to Help</h2>
-              <div id="scrollContainer" style="height: 40vh; overflow: hidden;">
-                <div style="will-change: transform; position: relative;" id="scrollContent">
-                  <ul id="scrollList">
-                    <li>Conda</li>
-                    <li>Anaconda</li>
-                    <li>Miniconda</li>
-                    <li>Mamba</li>
-                    <li>Pixi</li>
-                    <li>pip</li>
-                    <li>virtualenv</li>
-                    <li>Pipenv</li>
-                    <li>pyenv</li>
-                    <li>Poetry</li>
-                    <li>requirements.txt</li>
-                    <li>environment.yml</li>
-                    <li>renv</li>
-                    <li>uv</li>
-                    <li>just</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
                 ## Package Managers
-
+                
+                - Examples: uv, pixi, conda (Python), renv, uvr (R)
                 - Define dependencies + versions
                 - Install those dependencies
                 - Record dependencies' versions (all the way down)
                 - Isolate environments
                 - Manage Python/R versions
-                - Enable sharing packages
+
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Challenge: Time-Capsule of Dependencies
+                ## Best Practice: To Pin or Not To Pin?
 
-                <p>(see collaborative doc)</p>
+                ```yaml
+                numpy==2.1.1  # Is this a good idea?
+                pandas>=3.0.0  # Is this better?
+                ```
+                
+                - Pinning dependencies to fixed versions can enhance reproducibility
+                  - Readers know exactly which versions were used
+                  - Future dependency conflicts can (hopefully) be traced back
+                - But it can make code less robust and reusable
+                  - Patches and bug fixes are not applied
+                  - Other users might need to resolve dependency conflicts before they reuse or reproduce
+                - Pinning should depend on scope of project
+
               </textarea>
             </section>
-
-            <section data-state="standard 10">
-              <h2>A Time-Capsule for the <em>Future</em></h2>
-
-              <div style="width: 49%; float: left;">
-                <h3>Python</h3>
-                <pre style="width: fit-content;"><code data-trim class="language-bash">
-                  $ pip freeze > requirements.txt
-                </code></pre>
-
-                What does the file contain?
-                <br>
-                Re-create this environment with:
-
-                <pre style="width: fit-content;"><code data-trim class="language-bash">
-                  $ pip install -r requirements.txt
-                </code></pre>
-                Self-study: <a href="https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html#creating-virtual-environments-using-venv">Carpentries Lesson</a>
-              </div>
-
-              <div class="fragment" style="width: 49%; float: right;">
-                <h3>R</h3>
-                Initialize renv, and then “save” and “load” the state of your project library.
-
-                <pre style="width: fit-content;"><code data-trim class="language-bash">
-                  renv::init()
-                  renv::snapshot()  # save
-                  renv::restore()   # load
-                </code></pre>
-
-                Self-study: <a href="https://carpentries-incubator.github.io/reproducible-publications-quarto/15-renv.html">Carpentries Lesson</a>
-              </div>
-            </section>
-
-            <section data-state="standard 10">
-              <h2>Upload to GitHub</h2>
-
-              <ul>
-                <li><b>Add</b></li>
-                <ul>
-                  <li>VS Code: click '+' next to 'Changes' (or files)</li>
-                  <li>RStudio: click 'Staged'</li>
-                  <ul>
-                    <li>N.B.: also include <code>.RProfile</code> and <code>activate.R</code></li>
-                  </ul>
-                  <li>git: <code>git add [filenames]</code></li>
-                </ul>
-                <li><b>Commit</b></li>
-                <ul>
-                  <li>IDEs: Write "add dependencies", click 'Commit'</li>
-                  <li>git: <code>git commit -m "add dependencies"</code></li>
-                </ul>
-                <li><b>Push</b></li>
-                <ul>
-                  <li>IDEs: Click 'Push'</li>
-                  <li>git: <code>git push</code></li>
-                </ul>
-              </ul>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Take-Away
-
-                - Recording dependencies <em>with versions</em> can make it easier for another person to execute your code
-                  - ⚠️ Another person is you, in three months ⚠️ <!-- .element: class="fragment" -->
-                - There are many tools to record dependencies <!-- .element: class="fragment" -->
-              </textarea>
-            </section>
+            
           </section> <!-- end of Software Dependencies -->
 
           <section> <!-- start of Software Documentation -->
@@ -345,15 +295,6 @@
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## [Challenge](https://carpentries-incubator.github.io/reproducible-research-through-reusable-code-in-1-day/documentation.html#writing-good-readme-files)
-
-                <p class="fragment">(see collaborative doc)</p>
-
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
                 ## In-Code Documentation
 
                 - Helps the reader understand the code
@@ -367,18 +308,18 @@
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Readable vs. Commented Code
+                ## Best Practice: Code As Documentation
 
                 ```python
                 # convert from degrees celsius to fahrenheit
-                def convert(d):
+                def convert(d: float) -> float:
                     return d * 5 / 9 + 32
                 ```
 
                 vs.
 
                 ```python
-                def celsius_to_fahrenheit(degrees):
+                def celsius_to_fahrenheit(degrees: float) -> float:
                     return degrees * 5 / 9 + 32
                 ```
 
@@ -448,40 +389,6 @@
               </textarea>
             </section>
 
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Online Documentation
-
-                - Create your API documentation automatically (e.g., using Sphinx or roxygen)
-                - Deploy your documentation automatically to a GitHub page or Read the Docs
-
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Take-Away
-
-                - The README is the first landing page for other users/developers
-                - A good README gives a broad overview on how to reuse your code
-                - In-code documentation and docstrings provide details on how to reuse your code
-                
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Resources
-
-                - README guide and template: https://www.makeareadme.com/
-                - Hemingway app: https://hemingwayapp.com/
-                - Writing good comments: https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/
-                - numpydoc style guide: https://numpydoc.readthedocs.io/en/latest/format.html#
-                - The Turing Way Community. (2022). <em>Writing human readable code</em>. Zenodo. https://zenodo.org/records/7625728
-
-              </textarea>
-            </section>
-
           </section> <!-- end of Software Documentation -->
 
           <section> <!-- start of Code Conventions-->
@@ -514,7 +421,8 @@
               <ul>
                 <li>Follow style guides without altering functionality</li>
                 <li>Increase readability and reduce chance for merge conflicts</li>
-                <li>Formatter can fix issues, if requested</li>
+                <li>Formatter can fix many issues automatically, if requested</li>
+                <li>Examples: ruff (Python), air (R)</li>
               </ul>
             </section>
 
@@ -524,64 +432,16 @@
                 <img style="height: 20vh; margin: 0; padding: 0;" src="./files/Linter_logo_v2.svg">
                 <p style="font-size: small;"><a href="https://commons.wikimedia.org/wiki/File:Linter_logo_v2.svg">Image</a> by <a href="https://commons.wikimedia.org/wiki/User:Isarra">Isarra</a> under <a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC BY 4.0</a></p>
 
-                - Check for errors, complexity, unused code, or performance bottlenecks
+                - Check for errors, complexity, unused code, software development principle violations, or performance bottlenecks
                 - More heavy-handed than formatters
-                - Linters can fix _most_ issues, if requested
+                - Linters can fix many issues automatically, if requested
+                - Examples: ruff (Python), lintr (R)
 
               </textarea>
             </section>
+          </section> <!-- end of Coding Conventions-->
 
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Challenge: Improve Your Code
-
-                Install and use a formatter and a linter to improve the style of your code.
-
-(see collaborative doc)
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## (Optional) Challenge:<br>Git Pre-Commit Hooks
-
-                Apply formatting and linting before any commit.
-
-                [Carpentries: Pre-Commit Hooks](https://carpentries-incubator.github.io/reproducible-research-through-reusable-code-in-1-day/good-code.html#optional-git-pre-commit-hooks)
-
-(see collaborative doc)
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Further Reading: CI/CD
-
-                - Let the robot overlords take over 🤖
-                - Execute commands on GitHub with every push
-                  - e.g. formatters & linters
-                - GitHub: [GitHub Actions](https://docs.github.com/en/actions)
-                - GitLab: [CI/CD](https://docs.gitlab.com/ci/)
-                - Python: [`ruff` integrations](https://docs.astral.sh/ruff/integrations/)
-                - R: use [`usethis`](https://usethis.r-lib.org/reference/use_github_action.html) for ...
-                  - [`lintr` integration](https://github.com/r-lib/lintr/?tab=readme-ov-file#setting-up-github-actions) and
-                  - [`styler` integration](https://github.com/r-lib/actions/tree/v2-branch/examples#style-package)
-
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Take-Away
-
-                - Coding conventions help you create more readable code that is easier to reuse and contribute to.
-                - Consistently formatted code including descriptive variable and function names is easier to read and write.
-                - Linted code is easier to understand and can be faster
-              </textarea>
-            </section>
-          </section> <!-- end of Modular Coding -->
-
-          <section> <!-- start of Code Conventions-->
+          <section> <!-- start of Modular Coding-->
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
                 # Modular Coding
@@ -592,11 +452,10 @@
               <textarea data-template>
                 ## What is Modularity?
 
-                Simple components combined to produce complex behavior.
-
-                - Software can be 'built up' from smaller elements.
-                - Elements are self-contained and independent.
-                - Each element handles a specific (set of) task(s).
+                - Simple components combined to produce complex behavior
+                - Software can be "built up" from smaller elements
+                - Elements are self-contained and independent
+                - Each element handles a specific (set of) task(s) (separation of concerns)
 
                 <img src="./files/modern_times.jpg">
                 <p style="font-size: small;">Charlie Chaplin in Modern Times (1936).
@@ -628,9 +487,8 @@
               <textarea data-template>
                 ## Functions
 
-                - Increase readability
-                  - Give it an expressive name, avoid abbreviations
-                - Create/change code _once_, use it in multiple places
+                - Increase readability (give it an expressive name, avoid abbreviations)
+                - Create/change code _once_, use it in multiple places (e.g., rule of three; DRY)
                 - Re-use code in other projects
                 - Simplify testing
                 - Save time!
@@ -652,7 +510,8 @@
                 ## Purity
 
                 - A "pure" function is not influenced by forces outside of it
-                - They _always_ work the same, easy to understand and test
+                - It has no side-effects (e.g., writing to a file)
+                - It _always_ works the same, easy to understand and test
                 - "Impurities" can be accidental:
 
                 ```python
@@ -678,108 +537,95 @@
               <textarea data-template>
                 ## Best Practices
 
-                Good functions...
+                - Good functions perform limited and clearly defined tasks
+                - Are pure (if possible) and predictable
+                - Are readable and understandable (explicit is better than clever!)
+                - Have a good name (arguments should also have good names)
 
-                - perform limited and clearly defined tasks
-                - are pure (if possible) and predictable
-                - are readable and understandable
-                  - explicit is better than clever!
-                - have a good name.
+              </textarea>
+            </section>
+          
+          </section> <!-- end of Modular Coding-->
+
+          <section> <!-- start of Testing -->
+            <section data-state="standard 10">
+              <h1>Testing</h1>
+              How to make sure your code does what it is supposed to do
+            </section>
+
+            <section data-state="standard 10" data-markdown>
+              <textarea data-template>
+                ## Why It Is a Good Idea to Test Code
+
+                <img src="./files/testing_mars.png">
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Defining a Function
+                ## Ad-hoc Testing
 
-                <pre style="width: fit-content; float: left; font-size: 47%;"><code data-trim class="language-python">
-                  def my_function(parameters):
-                      # perform action
-                      # return value
-
-
-                  def fahr_to_kelvin(temp):
-                    kelvin = ((temp - 32) * (5 / 9)) + 273.15
-                    return kelvin
-                  &nbsp;
-                </code></pre>
-
-                <pre style="width: fit-content; float: right; font-size: 47%;"><code data-trim class="language-r">
-                  my_function <- function(parameters) {
-                    # perform action
-                    # return value
-                  }
-
-                  fahr_to_kelvin <- function(temp) {
-                    kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-                    return(kelvin)
-                  }
-                </code></pre>
-
-                <pre class="fragment" style="width: 100%; font-size: 47%; float: left; margin-left: auto;"><code data-trim class="language-python">
-                  # freezing point of water
-                  fahr_to_kelvin(32)  # 273.15
-
-                  # boiling point of water
-                  fahr_to_kelvin(212)  # 373.15
-                </code></pre>
-
+                - Many researchers test their code implicitly:
+                  - Write code
+                  - Run script or notebook cell and see if it produces expected results
+                  - Adjust code if necessary and repeat
+                - Problems with ad-hoc testing:
+                  - Time-consuming
+                  - Error-prone
+                  - Not systematic (edge cases)
+                  - Not reproducible
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Challenge: Identify Code That Can Be Put in a Function
+                ## Automated Testing
 
-                Indicators:
-                - Repeating code
-                - Deeply nested code
-                - Code with poor readability
-                - [Create an issue in your project](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue)<br>for each possible function that you find
+                - Advantages of automated testing
+                  - Fewer (undetected) bugs
+                  - Forces better code structure (modularity)
+                  - Easier to apply changes to code
+                  - More trustworthy code
+                - Tests as documentation and starting point for other developers
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## (Optional) Challenges
+                ## What To Test
 
-                - Modularity in Python
-                - Writing Good Functions in R
-
-                (see collaborative doc)
+                - External instead of internal interface 
+                - Behavior over implementation
+                - Fragile over robust code
+                - Fixed bugs (regression)
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Challenge: Combining Functions
+                ## Testing Layers
 
-                The real power of functions comes from mixing, matching and combining them into ever-larger chunks to get the effect we want.
-
-                (see collaborative doc)
+                - **Unit** tests: Test small modular units (e.g., a single function)
+                - **Integration** tests: Test how units work together
+                - **System** tests: Test system end-to-end (e.g., entire analysis script)
+                  - Only proceed to next layer if previous layer passes
+                - **Regression** tests: Test whether output is still the same (e.g., tables, plots)
+                  - Do not check if output is correct!
               </textarea>
             </section>
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ### Further Reading
+                ## Best Practices
 
-                - [Modular Code Development](https://esciencecenter-digital-skills.github.io/good-practices-lesson/1-modular-code.html) from Good practices in research software development
-                - [Functions explained](https://swcarpentry.github.io/r-novice-gapminder/10-functions.html) from R for Reproducible Scientific Analysis Software Carpentry lesson
-                - [Functions chapter](https://r4ds.hadley.nz/functions) from R for Data Science (2e)
+                - Any tests are better than no tests
+                - Tests should not only be written but also be run
+                - Tests should be run proportionally to the time it takes to run them
+                - Test cases should be realistic
+                - Tests should be fully self-sufficient and self-contained
               </textarea>
             </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Take-Away
-
-                - Software is built from smaller, self-contained elements, each handling specific tasks.
-                - Modular code enhances robustness, readability, and ease of maintenance.
-                - Good functions perform limited, defined tasks and have descriptive names.
-              </textarea>
-            </section>
-          </section> <!-- end of Modular Coding -->
+          </section> <!-- end of Testing -->
 
           <section> <!-- start of Next Steps: How to make your code reusable -->
             <section data-state="standard 10">
@@ -828,75 +674,7 @@
               </textarea>
             </section>
 
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Resources
-
-                - The Turing Way Community. (2022). <em>Licenses</em>. Zenodo. https://zenodo.org/records/7625728
-                - List of approved licenses by Open Source Foundation: https://opensource.org/license?ls=apache
-
-              </textarea>
-            </section>
-
           </section> <!-- end of Next Steps: How to make your code reusable -->
-
-          <section> <!-- start of Work on Your Own Project -->
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                # Work on Your Own Project!
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Objectives
-
-                - Define your software dependencies
-                - Document your code well and write a `README.md`
-                - Apply formatting and linting
-                - Modularize your code if needed
-                  - Re-run formatting and linting
-                - Add a license
-                - Run your project through the [FAIR software checklist](https://fairsoftwarechecklist.net/v0.2/) and [create a badge](https://github.com/fair-software/howfairis) to your repo
-                - Add a [`CITATION.cff` file](https://citation-file-format.github.io/cff-initializer-javascript/#/)
-                - [Publish your project](https://zenodo.org/login/?next=%2Faccount%2Fsettings%2Fgithub%2F) to Zenodo
-
-                *You will probably not be able to finish the list. Instead, try to work on each item a bit to learn the steps involved.*
-              </textarea>
-            </section>
-          </section> <!-- end of Work on Your Own Project -->
-
-          <section> <!-- start of Reusability Check -->
-            <section data-state="standard 10">
-              <h1>Reproducibility Check</h1>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Reproducibility Check
-
-                - Share your project with one of your peers
-                - Answer the following questions:
-                  - Is the code clearly documented?
-                  - Can you reuse the code?
-                  - Are you able to rerun the code independently and can you reproduce results?
-                  - How could the reusability of the project be improved?
-                - Be constructive (reproducibility is difficult)
-                - Be reasonable (not every project needs an end-to-end reproducibility workflow)
-
-              </textarea>
-            </section>
-
-            <section data-state="standard 10" data-markdown>
-              <textarea data-template>
-                ## Resources
-
-                - ReproHack: https://www.reprohack.org/
-                - CODECHECK: https://codecheck.org.uk/
-
-              </textarea>
-            </section>
-          </section> <!-- end of Reusability Check -->
 
           <section> <!-- start of Wrap-Up -->
             <section data-state="standard 10">
@@ -919,7 +697,7 @@
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Next Steps
+                ## Final Remarks
 
                 - Philosophy: Partial reproducibility > no reproducibility!
                 - Small steps: Improve practices from one project to the next
@@ -934,11 +712,25 @@
 
             <section data-state="standard 10" data-markdown>
               <textarea data-template>
-                ## Reference and Further Reading
+                ## References and Further Reading
 
-                - Carpentries workshop [material](https://carpentries-incubator.github.io/reproducible-research-through-reusable-code-in-1-day/index.html) <em>Reproducible research through reusable code in 1 day</em>
+                - Carpentries workshop [material](https://carpentries-incubator.github.io/reproducible-research-through-reusable-code-in-1-day/index.html) from Reproducible Research Through Reusable Code
+                - Carpentries workshop [material](https://carpentries-incubator.github.io/good-practices-lesson/) from Good Practices In Research Software Development
                 - The Turing Way Community. (2022). <em>The Turing Way: A handbook for reproducible, ethical and collaborative research (1.0.2)</em>. Zenodo. https://zenodo.org/records/7625728
-                
+                - Wickham, H., & Bryan, J. (2023). R packages: Organize, test, document, and share your code (2nd edition). https://r-pkgs.org/
+                - [README guide and template](https://www.makeareadme.com/)
+                - [Writing good comments](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/) on Stack Overflow
+                - [List](https://opensource.org/license?ls=apache) of approved licenses by Open Source Foundation
+
+              </textarea>
+            </section>
+
+            <section data-state="standard 10" data-markdown>
+              <textarea data-template>
+                ## Slides Link
+
+                <img src="files/qr_slides.png" alt="QR code for link to slides.">
+
               </textarea>
             </section>
           </section> <!-- end of Wrap-Up -->
