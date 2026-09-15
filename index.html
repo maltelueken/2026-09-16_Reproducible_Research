@@ -526,10 +526,6 @@
                 ```python
                 >>> append(2)
                 [1, 2]  # default list shared accross calls! ☠️
-                ```
-                <!-- .element: class="fragment" -->
-
-                *Try to keep impure functions short!* <!-- .element: class="fragment" -->
               </textarea>
             </section>
 
@@ -769,6 +765,14 @@
 
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, Escience ]
+      });
+
+      // Reveal bullet points and code snippets one at a time on click
+      Reveal.on('ready', () => {
+        document.querySelectorAll('.reveal .slides :is(li, pre):not(.fragment)').forEach(el => {
+          el.classList.add('fragment');
+        });
+        Reveal.sync();
       });
 
       // auto-scrolling
